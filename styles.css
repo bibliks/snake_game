@@ -1,0 +1,321 @@
+:root {
+  color-scheme: dark;
+  --bg-top: #11223f;
+  --bg-bottom: #06101f;
+  --glass: rgba(15, 23, 42, 0.56);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(226, 232, 240, 0.76);
+  --accent: #4ade80;
+  --accent-strong: #22c55e;
+  --accent-warm: #fb7185;
+  --shadow: 0 24px 80px rgba(2, 8, 23, 0.42);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Manrope", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(74, 222, 128, 0.18), transparent 28%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  padding:
+    calc(20px + var(--safe-top))
+    calc(18px + var(--safe-right))
+    calc(28px + var(--safe-bottom))
+    calc(18px + var(--safe-left));
+}
+
+.ambient {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(22px);
+  pointer-events: none;
+  opacity: 0.75;
+  animation: float 12s ease-in-out infinite;
+}
+
+.ambient-one {
+  top: 10%;
+  left: -40px;
+  width: 180px;
+  height: 180px;
+  background: rgba(59, 130, 246, 0.34);
+}
+
+.ambient-two {
+  right: -30px;
+  bottom: 16%;
+  width: 160px;
+  height: 160px;
+  background: rgba(34, 197, 94, 0.28);
+  animation-delay: -4s;
+}
+
+.phone-frame {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 460px);
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+}
+
+.hero-card,
+.board-card,
+.controls-card,
+.stat-card {
+  border-radius: 28px;
+}
+
+.hero-card {
+  padding: 22px 22px 20px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.hero-card h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 0.92;
+}
+
+.control-pill,
+.primary-button {
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+}
+
+.control-pill {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.control-pill.secondary {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.control-pill:active,
+.primary-button:active,
+.dpad-button:active {
+  transform: scale(0.97);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  padding: 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+}
+
+.stat-value {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.board-card {
+  padding: 18px;
+}
+
+.board-header,
+.controls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.board-title,
+.controls-header p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.controls-header span {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  text-align: right;
+}
+
+.canvas-wrap {
+  position: relative;
+  margin-top: 16px;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.78)),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(74, 222, 128, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  touch-action: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.74));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay-kicker {
+  margin: 0 0 8px;
+  color: #86efac;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.overlay h2 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3rem);
+}
+
+.overlay p {
+  max-width: 280px;
+  margin: 10px 0 18px;
+  color: var(--text-secondary);
+}
+
+.primary-button {
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  color: #052e16;
+  background: linear-gradient(135deg, #86efac, #4ade80);
+  font-weight: 800;
+}
+
+.controls-card {
+  padding: 18px;
+}
+
+.dpad {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(72px, 1fr));
+  grid-template-areas:
+    ". up ."
+    "left center right"
+    ". down .";
+  gap: 10px;
+}
+
+.dpad-button {
+  min-height: 68px;
+  border: 0;
+  border-radius: 24px;
+  cursor: pointer;
+  color: var(--text-primary);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06)),
+    rgba(15, 23, 42, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.dpad-button.up { grid-area: up; }
+.dpad-button.left { grid-area: left; }
+.dpad-button.center {
+  grid-area: center;
+  font-size: 1rem;
+  background: linear-gradient(180deg, rgba(251, 113, 133, 0.34), rgba(244, 63, 94, 0.2));
+}
+.dpad-button.right { grid-area: right; }
+.dpad-button.down { grid-area: down; }
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -18px, 0); }
+}
+
+@media (max-width: 420px) {
+  .hero-card,
+  .board-card,
+  .controls-card,
+  .stat-card {
+    border-radius: 24px;
+  }
+
+  .hero-card {
+    padding: 20px;
+  }
+
+  .board-card,
+  .controls-card {
+    padding: 16px;
+  }
+}

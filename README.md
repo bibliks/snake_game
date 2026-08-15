@@ -1,17 +1,17 @@
-# Snake Game
+# Игра «Змейка»
 
-Static iOS-inspired Snake game for GitHub Pages.
+Статическая игра «Змейка» в стиле iOS для размещения на GitHub Pages.
 
-## Run locally
+## Локальный запуск
 
-Open `index.html` directly in a browser, or serve the folder with any static server.
+Откройте файл `index.html` напрямую в браузере или запустите папку с помощью любого статического веб-сервера.
 
-## Publish to GitHub Pages
+## Публикация на GitHub Pages
 
-1. Push these files to the `main` branch of `bibliks/snake_game`.
-2. In GitHub, open `Settings` -> `Pages`.
-3. Set `Source` to `Deploy from a branch`.
-4. Select branch `main` and folder `/ (root)`.
-5. Save and wait for the site to publish.
+1. Загрузите эти файлы в ветку `main` репозитория `bibliks/snake_game`.
+2. В GitHub откройте `Settings` → `Pages`.
+3. В разделе `Source` выберите `Deploy from a branch`.
+4. Выберите ветку `main` и папку `/ (root)`.
+5. Сохраните настройки и дождитесь публикации сайта.
 
-The project is fully static, so no build step is required.
+Проект полностью статический, поэтому сборка перед публикацией не требуется.
